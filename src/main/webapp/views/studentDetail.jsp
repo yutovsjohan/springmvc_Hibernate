@@ -1,5 +1,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -12,13 +13,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-<title><spring:message code="student.label" /></title>
+<title><spring:message code="student.detail.label" /></title>
 </head>
 <body>
 
 	<div class="panel panel-default">
-		<div id="abc" class="panel-heading h3 text-center">
-			<spring:message code="student.header" />
+		<div class="panel-heading h3 text-center">
+			<spring:message code="student.detail.label" />
 		</div>
 		<div class="panel-body">
 			<table class="table table-striped">
@@ -46,7 +47,7 @@
 									<button class="btn btn-primary" onclick="getStudent(${student.id}, 'EDIT');">
 										<spring:message code="student.btn.edit" />
 									</button>
-									<button class="btn btn-danger" onclick="deleteStudent(${student.id}, 'DELETE');">
+									<button class="btn btn-danger" onclick="getStudent(${student.id}, 'VIEW');">
 										<spring:message code="student.btn.delete" />
 									</button>
 								</td>
@@ -55,7 +56,7 @@
 					</c:when>
 					<c:otherwise>
 						<tr>
-							<th colspan="5" class="text-center"><spring:message code="student.empty" /></th>
+							<th colspan="5" class="text-center"><spring:message code="student.btn.empty" /></th>
 						</tr>
 					</c:otherwise>
 				</c:choose>
@@ -69,6 +70,5 @@
 			</table>
 		</div>
 	</div>
-
 </body>
 </html>
