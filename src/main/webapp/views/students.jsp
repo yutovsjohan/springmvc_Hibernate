@@ -16,59 +16,5 @@
 </head>
 <body>
 
-	<div class="panel panel-default">
-		<div id="abc" class="panel-heading h3 text-center">
-			<spring:message code="student.header" />
-		</div>
-		<div class="panel-body">
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th><spring:message code="student.table.id" /></th>
-						<th><spring:message code="student.table.name" /></th>
-						<th><spring:message code="student.table.age" /></th>
-						<th><spring:message code="student.table.address" /></th>
-						<th><spring:message code="student.table.action" /></th>
-					</tr>
-				</thead>
-				<c:choose>
-					<c:when test="${!empty students }">
-						<c:forEach items="${students }" var="student">
-							<tr>
-								<td>${student.id }</td>
-								<td>${student.firstName } ${student.lastName }</td>
-								<td>${student.age }</td>
-								<td>${student.address.street } ${student.address.district }, ${student.address.city }</td>
-								<td>
-									<button class="btn btn-info" onclick="getStudent(${student.id}, 'VIEW');">
-										<spring:message code="student.btn.view" />
-									</button>
-									<button class="btn btn-primary" onclick="getStudent(${student.id}, 'EDIT');">
-										<spring:message code="student.btn.edit" />
-									</button>
-									<button class="btn btn-danger" onclick="deleteStudent(${student.id}, 'DELETE');">
-										<spring:message code="student.btn.delete" />
-									</button>
-								</td>
-							</tr>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<tr>
-							<th colspan="5" class="text-center"><spring:message code="student.empty" /></th>
-						</tr>
-					</c:otherwise>
-				</c:choose>
-				<tr>
-					<th colspan="5">
-						<button onclick="location.href='addStudent'" class="btn btn-primary">
-							<spring:message code="student.btn.add" />
-						</button>
-					</th>
-				</tr>
-			</table>
-		</div>
-	</div>
-
 </body>
 </html>
