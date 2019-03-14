@@ -7,22 +7,22 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.website.springmvc.entity.Address;
+import com.website.springmvc.entities.Address;
 
 @Repository
-public class AddressDAO extends DAO<Address> {
+public class AddressDao extends Dao<Address> {
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
 	public List<Address> getAll() {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Address> address = session.createQuery("from address").list();
-		return address;
+		return session.createQuery("from Address").list();
 	}
 
 	@Override
-	public Address get(long id) {
+	public Address get(Long id) {
 		Session session = this.sessionFactory.getCurrentSession();
 		return (Address) session.get(Address.class, new Long(id));
 	}
@@ -44,11 +44,11 @@ public class AddressDAO extends DAO<Address> {
 			return Boolean.FALSE;
 		}
 	}
-	
+
 	@Override
 	public Boolean delete(Address address) {
 		Session session = this.sessionFactory.getCurrentSession();
-		if(null != address){
+		if (null != address) {
 			try {
 				session.delete(address);
 				return Boolean.TRUE;
@@ -60,14 +60,13 @@ public class AddressDAO extends DAO<Address> {
 	}
 
 	@Override
-	public Boolean delete(long id){
+	public Boolean delete(Long id) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Address address = (Address) session.load(Address.class, new Long(id));
-		if(null != address){
+		if (null != address) {
 			session.delete(address);
 			return Boolean.TRUE;
 		}
 		return Boolean.FALSE;
 	}
-
 }

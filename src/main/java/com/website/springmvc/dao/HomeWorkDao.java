@@ -7,50 +7,50 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.website.springmvc.entity.Clazz;
+import com.website.springmvc.entities.HomeWork;
 
 @Repository
-public class ClazzDAO extends DAO<Clazz> {
+public class HomeWorkDao extends Dao<HomeWork> {
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
-	public List<Clazz> getAll() {
+	public List<HomeWork> getAll() {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Clazz> Clazzs = session.createQuery("from clazz").list();
-		return Clazzs;
+		return session.createQuery("from HomeWork").list();
 	}
 
 	@Override
-	public Clazz get(long id) {
+	public HomeWork get(Long id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		return (Clazz) session.get(Clazz.class, new Long(id));
+		return (HomeWork) session.get(HomeWork.class, new Long(id));
 	}
 
 	@Override
-	public Clazz add(Clazz Clazz) {
+	public HomeWork add(HomeWork homeWork) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.save(Clazz);
-		return Clazz;
+		session.persist(homeWork);
+		return homeWork;
 	}
 
 	@Override
-	public Boolean update(Clazz Clazz) {
+	public Boolean update(HomeWork homeWork) {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			session.update(Clazz);
+			session.update(homeWork);
 			return Boolean.TRUE;
 		} catch (Exception e) {
 			return Boolean.FALSE;
 		}
 	}
-	
+
 	@Override
-	public Boolean delete(Clazz Clazz) {
+	public Boolean delete(HomeWork homeWork) {
 		Session session = this.sessionFactory.getCurrentSession();
-		if(null != Clazz){
+		if (null != homeWork) {
 			try {
-				session.delete(Clazz);
+				session.delete(homeWork);
 				return Boolean.TRUE;
 			} catch (Exception e) {
 				return Boolean.FALSE;
@@ -60,14 +60,13 @@ public class ClazzDAO extends DAO<Clazz> {
 	}
 
 	@Override
-	public Boolean delete(long id){
+	public Boolean delete(Long id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Clazz Clazz = (Clazz) session.load(Clazz.class, new Long(id));
-		if(null != Clazz){
-			session.delete(Clazz);
+		HomeWork homeWork = (HomeWork) session.load(HomeWork.class, new Long(id));
+		if (null != homeWork) {
+			session.delete(homeWork);
 			return Boolean.TRUE;
 		}
 		return Boolean.FALSE;
 	}
-	
 }

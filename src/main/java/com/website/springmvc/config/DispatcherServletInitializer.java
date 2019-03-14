@@ -15,13 +15,13 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 
-		return new Class<?>[] { SpringWebConfig.class, Config.class };
+		return new Class<?>[] { SpringWebConfig.class, SpringDatabaseConfig.class };
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
 
-		return new Class<?>[] {SpringWebConfig.class, SpringDatabaseConfig.class};
+		return new Class<?>[] {};
 	}
 
 	@Override
@@ -35,5 +35,4 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 
 		registration.setInitParameter(DISPATCH_OPTIONS_REQUEST, Boolean.TRUE.toString());
 	}
-	
 }

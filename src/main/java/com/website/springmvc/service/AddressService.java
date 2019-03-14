@@ -2,41 +2,41 @@ package com.website.springmvc.service;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.website.springmvc.dao.DAO;
-import com.website.springmvc.entity.Address;
+import com.website.springmvc.dao.Dao;
+import com.website.springmvc.entities.Address;
 
 @Transactional
 @Service
 public class AddressService {
+	
 	@Autowired
-	DAO<Address> AddressDao;
+	Dao<Address> addressDAO;
 	
 	public List<Address> getAll(){
-		return AddressDao.getAll();
+		return addressDAO.getAll();
 	}
 	
-	public Address get(Long id) {
-		return AddressDao.get(id);
+	public Address get(Long id){
+		return addressDAO.get(id);
 	}
 	
-	public Address add(Address address) throws Exception {
-		return AddressDao.add(address);
+	public Address add(Address t){
+		return addressDAO.add(t);
 	}
 	
-	public Boolean update(Address address) throws Exception {
-		return AddressDao.update(address);
+	public Boolean update(Address t){
+		return addressDAO.update(t);
 	}
 	
-	public Boolean delete(Address address) throws Exception {
-		return AddressDao.delete(address);
+	public Boolean delete(Address t){
+		return addressDAO.delete(t);
 	}
 	
-	public Boolean delete(Long id) throws Exception {
-		return AddressDao.delete(id);
+	public Boolean delete(Long id){
+		return addressDAO.delete(id);
 	}
 }

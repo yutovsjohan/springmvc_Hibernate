@@ -1,67 +1,57 @@
-package com.website.springmvc.entity;
+package com.website.springmvc.entities;
 
-import java.io.Serializable;
+import static javax.persistence.GenerationType.IDENTITY;
 
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "address", catalog = "website")
-public class Address implements Serializable{
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID", unique = true, nullable = false)
-	private long id;
-	
-	@Column(name = "street", length = 100)
-	private String street;
-	
-	@Column(name = "district", length = 100)
-	private String district;
-	
-	@Column(name = "city", length = 100)
-	private String city;
-	
-	
-	public Address() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+public class Address implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
-	public Address(String street, String district, String city) {
-		super();
-		this.street = street;
-		this.district = district;
-		this.city = city;
-	}
-	
+	private Long id;
+	private String street;
+	private String district;
+	private String city;
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "ID", unique = true, nullable = false)
 	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+
+	public void setId(Long id) {
 		this.id = id;
 	}
+
+	@Column(name = "STREET", length = 20)
 	public String getStreet() {
 		return street;
 	}
+
 	public void setStreet(String street) {
 		this.street = street;
 	}
+
+	@Column(name = "DISTRICT", length = 20)
 	public String getDistrict() {
 		return district;
 	}
+
 	public void setDistrict(String district) {
 		this.district = district;
 	}
+
+	@Column(name = "CITY", length = 20)
 	public String getCity() {
 		return city;
 	}
+
 	public void setCity(String city) {
 		this.city = city;
 	}
@@ -69,5 +59,4 @@ public class Address implements Serializable{
 	public String toString(){
 		return String.format("{id:%s,street:%s,district:%s,city:%s}", id, street, district, city);
 	}
-	
 }

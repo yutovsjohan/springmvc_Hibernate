@@ -1,47 +1,37 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.demo.maven</groupId>
-	<artifactId>springmvc</artifactId>
+	<groupId>com.website.springmvc</groupId>
+	<artifactId>springmvc-hibernate</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Spring MVC Webapp</name>
+	<name>Spring MVC - Hibernate Webapp</name>
 	<url>http://maven.apache.org</url>
 	
-
 	<properties>
-		<failOnMissingWebXml>false</failOnMissingWebXml>
-		
 		<!-- Generic properties -->
-		<java.version>1.7</java.version>
-
+		<jdk.version>1.7</jdk.version>
+		
+		<!-- Spring -->
+		<spring.version>4.2.1.RELEASE</spring.version>
+		
 		<!-- Web -->
-		<jsp.version>2.2</jsp.version>
 		<jstl.version>1.2</jstl.version>
 		<servlet.version>3.1.0</servlet.version>
-
-		<!-- Spring -->
-		<spring-framework.version>4.2.1.RELEASE</spring-framework.version>
-
-		<!-- Logging -->
-		<slf4j.version>1.7.5</slf4j.version>
-
-		<!-- Skip Test -->
-		<skipTests>false</skipTests>
-
+		
 		<!-- Other -->
 		<jackson.version>2.5.4</jackson.version>
 		<hibernate.version>4.3.5.Final</hibernate.version>
 		<org.aspectj-version>1.7.4</org.aspectj-version>
-		<mysql.connector.version>5.1.31</mysql.connector.version>
+		<mysql.connector.version>8.0.15</mysql.connector.version>
 	</properties>
-
+	
 	<dependencies>
 		<!-- Jackson -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.13</version>
+			<version>1.9.10</version>
 		</dependency>
 
 		<dependency>
@@ -55,66 +45,49 @@
 			<artifactId>jackson-core</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
-
+		
 		<!-- Spring MVC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${spring-framework.version}</version>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${spring-framework.version}</version>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
-
-		<!-- spring-orm -->
+		
+		<!-- Spring ORM -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
-			<version>5.1.5.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
-
-		<!-- hibernate -->
+		
+		<!-- Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.4.1.Final</version>
+			<version>${hibernate.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.4.1.Final</version>
+			<version>${hibernate.version}</version>
 		</dependency>
-
-
-
+		
 		<!-- Other Web dependencies -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>${jstl.version}</version>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>${servlet.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>${jsp.version}</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Logging with SLF4J -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
-			<scope>compile</scope>
 		</dependency>
 
 		<!-- Apache Commons DBCP -->
@@ -130,46 +103,38 @@
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql.connector.version}</version>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>${jstl.version}</version>
 		</dependency>
 	</dependencies>
-
-
-
-
-
 	<build>
+		<finalName>springmvc-hibernate</finalName>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
 				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-					<encoding>UTF-8</encoding>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.18.1</version>
+				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
-					<skipTests>${skipTests}</skipTests>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
 		</plugins>
-
-		<finalName>springmvc-hibernate</finalName>
 	</build>
-
 </project>

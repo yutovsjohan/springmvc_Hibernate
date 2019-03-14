@@ -7,51 +7,50 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.website.springmvc.entity.Course;
-
+import com.website.springmvc.entities.Course;
 
 @Repository
-public class CourseDAO extends DAO<Course> {
+public class CourseDao extends Dao<Course> {
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
 	public List<Course> getAll() {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Course> Courses = session.createQuery("from course").list();
-		return Courses;
+		return session.createQuery("from Course").list();
 	}
 
 	@Override
-	public Course get(long id) {
+	public Course get(Long id) {
 		Session session = this.sessionFactory.getCurrentSession();
 		return (Course) session.get(Course.class, new Long(id));
 	}
 
 	@Override
-	public Course add(Course Course) {
+	public Course add(Course course) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.save(Course);
-		return Course;
+		session.persist(course);
+		return course;
 	}
 
 	@Override
-	public Boolean update(Course Course) {
+	public Boolean update(Course course) {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			session.update(Course);
+			session.update(course);
 			return Boolean.TRUE;
 		} catch (Exception e) {
 			return Boolean.FALSE;
 		}
 	}
-	
+
 	@Override
-	public Boolean delete(Course Course) {
+	public Boolean delete(Course course) {
 		Session session = this.sessionFactory.getCurrentSession();
-		if(null != Course){
+		if (null != course) {
 			try {
-				session.delete(Course);
+				session.delete(course);
 				return Boolean.TRUE;
 			} catch (Exception e) {
 				return Boolean.FALSE;
@@ -61,15 +60,13 @@ public class CourseDAO extends DAO<Course> {
 	}
 
 	@Override
-	public Boolean delete(long id){
+	public Boolean delete(Long id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Course Course = (Course) session.load(Course.class, new Long(id));
-		if(null != Course){
-			session.delete(Course);
+		Course course = (Course) session.load(Course.class, new Long(id));
+		if (null != course) {
+			session.delete(course);
 			return Boolean.TRUE;
 		}
 		return Boolean.FALSE;
 	}
-	
 }
-

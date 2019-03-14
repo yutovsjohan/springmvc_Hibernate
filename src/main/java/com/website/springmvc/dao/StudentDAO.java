@@ -1,31 +1,29 @@
 package com.website.springmvc.dao;
 
-
-import java.util.Collections;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.website.springmvc.entity.Student;
+import com.website.springmvc.entities.Student;
 
 @Repository
-public class StudentDAO extends DAO<Student> {
+public class StudentDao extends Dao<Student> {
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
 	public List<Student> getAll() {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Student> students = session.createQuery("from student").list();
+		List<Student> students = session.createQuery("from Student").list();
 		return students;
 	}
 
 	@Override
-	public Student get(long id) {
+	public Student get(Long id) {
 		Session session = this.sessionFactory.getCurrentSession();
 		return (Student) session.get(Student.class, new Long(id));
 	}
@@ -47,11 +45,11 @@ public class StudentDAO extends DAO<Student> {
 			return Boolean.FALSE;
 		}
 	}
-	
+
 	@Override
 	public Boolean delete(Student student) {
 		Session session = this.sessionFactory.getCurrentSession();
-		if(null != student){
+		if (null != student) {
 			try {
 				session.delete(student);
 				return Boolean.TRUE;
@@ -63,14 +61,13 @@ public class StudentDAO extends DAO<Student> {
 	}
 
 	@Override
-	public Boolean delete(long id){
+	public Boolean delete(Long id) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Student student = (Student) session.load(Student.class, new Long(id));
-		if(null != student){
+		if (null != student) {
 			session.delete(student);
 			return Boolean.TRUE;
 		}
 		return Boolean.FALSE;
 	}
-	
 }
