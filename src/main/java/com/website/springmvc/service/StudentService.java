@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.website.springmvc.dao.Dao;
+import com.website.springmvc.dao.DAO;
 import com.website.springmvc.entities.Student;
 
 @Transactional
 @Service
 public class StudentService {
 	@Autowired
-	Dao<Student> studentDao;
+	DAO<Student> studentDao;
 
 	public List<Student> getAll() {
 		return studentDao.getAll();

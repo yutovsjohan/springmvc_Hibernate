@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.website.springmvc.entities.Student;
 
 @Repository
-public class StudentDao extends Dao<Student> {
+public class StudentDAO extends DAO<Student> {
 
 	@Autowired
 	private SessionFactory sessionFactory;

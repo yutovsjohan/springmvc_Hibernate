@@ -14,39 +14,42 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 <script type="text/javascript"
-	src="<c:url value="/resources/js/courses.js" />"></script>
-<title><spring:message code="course.label" /></title>
+	src="<c:url value="/resources/js/students.js" />"></script>
+<title>Student List</title>
 </head>
 <body>
 	<div class="panel panel-default">
 		<div id="title" class="panel-heading h3 text-center">
-			<spring:message code="course.header"></spring:message>
+			List Student
 		</div>
 		<div class="panel-body">
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th><spring:message code="course.table.id" /></th>
-						<th><spring:message code="course.table.name" /></th>
-						<th><spring:message code="course.table.action" /></th>
+						<th>ID</th>
+						<th>Firstname</th>
+						<th>Lastname</th>
+						<th>Age</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:choose>
-						<c:when test="${!empty courses}">
-							<c:forEach items="${courses}" var="course">
+						<c:when test="${!empty students}">
+							<c:forEach items="${students}" var="student">
 								<tr>
-									<td>${course.id}</td>
-									<td>${course.courseName}</td>
+									<td>${student.id}</td>
+									<td>${student.firstName}</td>
+									<td>${student.lastName}</td>
+									<td>${student.age}</td>									
 									<td>
-										<button class="btn btn-info" onclick="getCourse(${course.id}, 'VIEW');">
-											<spring:message code="course.btn.view" />
+										<button class="btn btn-info" onclick="getStudent(${student.id}, 'VIEW');">
+											VIEW
 										</button>
-										<button class="btn btn-primary" onclick="getCourse(${course.id}, 'EDIT');">
-											<spring:message code="course.btn.edit" />
+										<button class="btn btn-primary" onclick="getStudent(${student.id}, 'EDIT');">
+											EDIT
 										</button>
-										<button class="btn btn-danger" onclick="deleteCourse(${course.id});">
-											<spring:message code="course.btn.delete" />
+										<button class="btn btn-danger" onclick="deleteStudent(${student.id});">
+											DELETE
 										</button>
 									</td>
 								</tr>
@@ -54,16 +57,15 @@
 						</c:when>
 						<c:otherwise>
 							<tr>
-								<th colspan="5" class="text-center"><spring:message
-										code="course.table.empty" /></th>
+								<th colspan="5" class="text-center">List empty</th>
 							</tr>
 						</c:otherwise>
 					</c:choose>
 					<tr>
 						<th colspan="5">
-							<button onclick="location.href='addCourse'"
+							<button onclick="location.href='addStudent'"
 								class="btn btn-primary">
-								<spring:message code="student.btn.add" />
+								ADD
 							</button>
 						</th>
 					</tr>

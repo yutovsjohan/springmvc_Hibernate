@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.website.springmvc.entities.Address;
 
 @Repository
-public class AddressDao extends Dao<Address> {
+public class AddressDAO extends DAO<Address> {
 
 	@Autowired
 	private SessionFactory sessionFactory;

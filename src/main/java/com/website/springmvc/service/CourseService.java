@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.website.springmvc.dao.Dao;
+
+import com.website.springmvc.dao.DAO;
 import com.website.springmvc.entities.Course;
 
 @Transactional
@@ -13,7 +14,7 @@ import com.website.springmvc.entities.Course;
 public class CourseService {
 
 	@Autowired
-	Dao<Course> courseDAO;
+	DAO<Course> courseDAO;
 	
 	public List<Course> getAll(){
 		return courseDAO.getAll();

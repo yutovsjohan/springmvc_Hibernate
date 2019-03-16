@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.website.springmvc.entities.HomeWork;
 
 @Repository
-public class HomeWorkDao extends Dao<HomeWork> {
+public class HomeWorkDao extends DAO<HomeWork> {
 
 	@Autowired
 	private SessionFactory sessionFactory;
