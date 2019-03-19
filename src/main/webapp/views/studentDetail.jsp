@@ -22,7 +22,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading h3 text-center">Student Detail</div>
 		<div class="panel-body">			
-			<form:form class="form-horizontal" action="./student" method="post" modelAttribute="student">
+			<form:form class="form-horizontal" action="./student" method="post" modelAttribute="student"> 
 				<form:input path="id" type="hidden"/>
 				<div class="form-group">
 					<label class="control-label col-sm-4" for="fName">
@@ -47,25 +47,61 @@
 					<div class="col-sm-6">
 						<form:input path="age" type="number" class="form-control" id="age" name="age" placeholder="age" readonly="${mode == 'VIEW' }"/>
 					</div>
-				</div>
+				</div>	
 				<div class="form-group">
-					<div class="col-sm-offset-4 col-sm-6">
-						<c:if test = "${mode == 'VIEW' }">
-							<button disabled="disabled" type="submit" class="btn btn-primary">
-								SAVE
-							</button>
-						</c:if>
-						<c:if test = "${mode != 'VIEW' }">
-							<button type="submit" class="btn btn-primary">
-								SAVE
-							</button>
-						</c:if>
-						<button type="button" onclick="getStudents()" class="btn btn-default">
-							CANCEL
-						</button>
+					<label class="control-label col-sm-4" for="idCourse">
+					course
+					</label>
+					<div class="col-sm-6">
+						<form:select path="courses" multiple="true" items="${courses}" name="idCourse" id="idCourse" class="form-control" readonly="${mode == 'VIEW' }" />							   
 					</div>
 				</div>
+				<form:form class="form-horizontal" action="./student" method="post" modelAttribute="address"> 
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="city">
+						city
+						</label> 
+						<div class="col-sm-6">
+							<form:input path="city" type="text" class="form-control" id="city" name="city" placeholder="city" readonly="${mode == 'VIEW' }"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="district">
+						district
+						</label> 
+						<div class="col-sm-6">
+							<form:input path="district" type="text" class="form-control" id="district" name="district" placeholder="district" readonly="${mode == 'VIEW' }"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="street">
+						street
+						</label> 
+						<div class="col-sm-6">
+							<form:input path="street" type="text" class="form-control" id="street" name="street" placeholder="street" readonly="${mode == 'VIEW' }"/>
+						</div>
+					</div>					
+					<div class="form-group">
+						<div class="col-sm-offset-4 col-sm-6">
+							<c:if test = "${mode == 'VIEW' }">
+								<button disabled="disabled" type="submit" class="btn btn-primary">
+									SAVE
+								</button>
+							</c:if>
+							<c:if test = "${mode != 'VIEW' }">
+								<button type="submit" class="btn btn-primary">
+									SAVE
+								</button>
+							</c:if>
+							<button type="button" onclick="getStudents()" class="btn btn-default">
+								CANCEL
+							</button>
+						</div>
+					</div>
+				</form:form>			
 			</form:form>
+			
+			
 		</div>
 	</div>
 </body>

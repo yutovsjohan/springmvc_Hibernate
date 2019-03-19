@@ -30,6 +30,8 @@
 						<th>Firstname</th>
 						<th>Lastname</th>
 						<th>Age</th>
+						<th>Address</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -40,12 +42,19 @@
 									<td>${student.id}</td>
 									<td>${student.firstName}</td>
 									<td>${student.lastName}</td>
-									<td>${student.age}</td>									
+									<td>${student.age}</td>
+									
+									<c:forEach items="${addresses}" var="address">
+										<c:if test="${address.id == student.id }">
+											<td>district ${address.district}, ${address.street} street, ${address.city} city</td>
+										</c:if>
+									</c:forEach>
+																										
 									<td>
 										<button class="btn btn-info" onclick="getStudent(${student.id}, 'VIEW');">
 											VIEW
 										</button>
-										<button class="btn btn-primary" onclick="getStudent(${student.id}, 'EDIT');">
+										<button class="btn btn-warning" onclick="getStudent(${student.id}, 'EDIT');">
 											EDIT
 										</button>
 										<button class="btn btn-danger" onclick="deleteStudent(${student.id});">
@@ -57,12 +66,12 @@
 						</c:when>
 						<c:otherwise>
 							<tr>
-								<th colspan="5" class="text-center">List empty</th>
+								<th colspan="6" class="text-center">List empty</th>
 							</tr>
 						</c:otherwise>
 					</c:choose>
 					<tr>
-						<th colspan="5">
+						<th colspan="6">
 							<button onclick="location.href='addStudent'"
 								class="btn btn-primary">
 								ADD
