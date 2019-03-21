@@ -1,5 +1,6 @@
 package com.website.springmvc.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,16 +45,23 @@ public class StudentController {
 		return model;
 	}
 	
-	//them 
+	//add + edit
 	@RequestMapping(value = "/student", method = RequestMethod.POST)
-	public String saveStudent(@ModelAttribute("student") Student student, @ModelAttribute("address") Address address){
-		if(student.getId() == null){
-			studentService.add(student);
-			addressService.add(address);			
+	public String saveStudent(@ModelAttribute("student") Student student, @RequestParam String btnSave){
+		if(btnSave != "") {
+			List<Course> list = new ArrayList<>();
+			String[] ids = btnSave.split(",");
+			for (int i = 0; i < ids.length; i++) {
+				list.add(courseService.get((Long.parseLong(ids[i]))));
+			}
+			student.setCourses(list);
 		}
-		else{
+		System.out.println("id" + student.getId());
+		if (student.getId() == null) {
+			studentService.add(student);
+			System.out.println("added");
+		} else {			
 			studentService.update(student);
-			addressService.update(address);
 		}
 		return "redirect:/controller/students";
 	}
@@ -65,9 +73,9 @@ public class StudentController {
 		
 		model.setViewName("studentDetail");
 		model.addObject("student",new Student());
-		model.addObject("address",new Address());
-//		model.addObject("courses", courseService.getAll());
-		model.addObject("mode", "EDIT");
+//		model.addObject("address",new Address());
+		model.addObject("courses", courseService.getAll());
+		model.addObject("mode", "ADD");
 		
 		return model;
 	}
@@ -79,27 +87,18 @@ public class StudentController {
 		
 		model.setViewName("studentDetail");
 		model.addObject("student", studentService.get(id));
-		model.addObject("address", addressService.get(id));		
+//		model.addObject("address", addressService.get(id));	
+		model.addObject("courses", courseService.getAll());
 		model.addObject("mode",mode);
 
 		return model;
 	}	
 	
  	//delete 
-	@RequestMapping(value = "/student/{id}", method = RequestMethod.GET) 
-	public String studentCourse(@PathVariable("id") Long id){
-		addressService.delete(id);
-		studentService.delete(id);		
-		return "redirect:/controller/students";
-	}
-	
-	@ModelAttribute("courses")
-	public Map<Long, Course> getCourses() {
-		Map<Long, Course> listCourse = new HashMap<Long, Course>(); 
-		List<Course> courses = courseService.getAll();
-		for (Course course : courses) {
-			listCourse.put(course.getId(), course);
-		}
-		return listCourse;
+	@RequestMapping(value = "/student/{id}", method = RequestMethod.DELETE)
+	public void btnDelete(@PathVariable(value = "id") Long id) {
+		Student student = studentService.get(id);
+		studentService.delete(student);
+		addressService.delete(addressService.get(id));
 	}
 }

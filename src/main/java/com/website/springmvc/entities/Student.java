@@ -87,7 +87,7 @@ public class Student implements java.io.Serializable {
 		this.address = address;
 	}
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "STUDENT_COURSE", joinColumns = { @JoinColumn(name = "STUDENT_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "COURSE_ID") })
 	public List<Course> getCourses() {

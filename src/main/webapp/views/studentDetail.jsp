@@ -19,6 +19,7 @@
 <title>Student Detail</title>
 </head>
 <body>
+<div class="col-sm-6">
 	<div class="panel panel-default">
 		<div class="panel-heading h3 text-center">Student Detail</div>
 		<div class="panel-body">			
@@ -48,61 +49,132 @@
 						<form:input path="age" type="number" class="form-control" id="age" name="age" placeholder="age" readonly="${mode == 'VIEW' }"/>
 					</div>
 				</div>	
+								 
 				<div class="form-group">
-					<label class="control-label col-sm-4" for="idCourse">
-					course
-					</label>
+					<label class="control-label col-sm-4" for="city">
+					city
+					</label> 
 					<div class="col-sm-6">
-						<form:select path="courses" multiple="true" items="${courses}" name="idCourse" id="idCourse" class="form-control" readonly="${mode == 'VIEW' }" />							   
+						<form:input path="address.city" type="text" class="form-control" id="city" name="city" placeholder="city" readonly="${mode == 'VIEW' }"/>
 					</div>
 				</div>
-				<form:form class="form-horizontal" action="./student" method="post" modelAttribute="address"> 
-					<div class="form-group">
-						<label class="control-label col-sm-4" for="city">
-						city
-						</label> 
-						<div class="col-sm-6">
-							<form:input path="city" type="text" class="form-control" id="city" name="city" placeholder="city" readonly="${mode == 'VIEW' }"/>
+				<div class="form-group">
+					<label class="control-label col-sm-4" for="district">
+					district
+					</label> 
+					<div class="col-sm-6">
+						<form:input path="address.district" type="text" class="form-control" id="district" name="district" placeholder="district" readonly="${mode == 'VIEW' }"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4" for="street">
+					street
+					</label> 
+					<div class="col-sm-6">
+						<form:input path="address.street" type="text" class="form-control" id="street" name="street" placeholder="street" readonly="${mode == 'VIEW' }"/>
+					</div>
+				</div>					
+					
+				<!-- For adding and updating student -->
+						<c:if test="${mode == 'ADD' || mode == 'EDIT'}">
+							<div class="form-group">
+								<label for="tbCourses" class="control-lable col-md-4" style="text-align:right">Courses
+									registered </label>
+								<div class="col-md-6">
+									<table id="tbCourses" class="table table-bordered">
+										<thead>
+											<tr>
+												<th>Course ID</th>
+												<th>Course Name</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:if test="${mode == 'EDIT'}">
+												<c:forEach items="${student.courses}" var="course">
+													<tr onclick="courseClickedForEdit(this)">
+														<td>${course.id}</td>
+														<td>${course.courseName}</td>
+													</tr>
+												</c:forEach>
+											</c:if>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</c:if>
+
+						<div class="form-group" role="group" aria-label="Basic example">
+							<div class="col-sm-offset-4 col-sm-6">
+								<c:if test="${mode == 'EDIT' ||  mode == 'ADD'}">
+									<button type="submit" class="btn btn-primary" name="btnSave"
+										id="saveBtn" onclick="getId();">Save</button>
+								</c:if>
+	
+								<c:if test="${mode == 'VIEW'}">
+									<button disabled="disabled" type="submit"
+										class="btn btn-primary" name="btnSave" id="saveBtn"
+										onclick="getId();">Save</button>
+								</c:if>
+								<button type="button" class="btn btn-danger"
+									onclick="location.href='./students'">Cancel</button>
+							</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-4" for="district">
-						district
-						</label> 
-						<div class="col-sm-6">
-							<form:input path="district" type="text" class="form-control" id="district" name="district" placeholder="district" readonly="${mode == 'VIEW' }"/>
+
+					<!-- For displaying student -->
+					<c:if test="${mode == 'VIEW'}">
+						<div class="col-md-6">
+							<table class="table table-bordered table-dark" id="tbCourses">
+								<thead>
+									<tr>
+										<th>Course ID</th>
+										<th>Course Name</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:if test="${!empty student.courses}">
+										<c:forEach items="${student.courses}" var="course">
+											<tr>
+												<td>${course.id}</td>
+												<td>${course.courseName}</td>
+											</tr>
+										</c:forEach>
+									</c:if>
+								</tbody>
+							</table>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-4" for="street">
-						street
-						</label> 
-						<div class="col-sm-6">
-							<form:input path="street" type="text" class="form-control" id="street" name="street" placeholder="street" readonly="${mode == 'VIEW' }"/>
-						</div>
-					</div>					
-					<div class="form-group">
-						<div class="col-sm-offset-4 col-sm-6">
-							<c:if test = "${mode == 'VIEW' }">
-								<button disabled="disabled" type="submit" class="btn btn-primary">
-									SAVE
-								</button>
-							</c:if>
-							<c:if test = "${mode != 'VIEW' }">
-								<button type="submit" class="btn btn-primary">
-									SAVE
-								</button>
-							</c:if>
-							<button type="button" onclick="getStudents()" class="btn btn-default">
-								CANCEL
-							</button>
-						</div>
-					</div>
-				</form:form>			
+					</c:if>					
+				
 			</form:form>
-			
 			
 		</div>
 	</div>
+</div>
+<div class="col-sm-6">
+	<c:if test="${mode == 'EDIT' || mode == 'ADD'}">
+		<div class="col-md-6">
+			<table class="table table-striped table-dark" id="listCourses">
+				<thead>
+					<tr>
+						<th>Course ID</th>
+						<th>Course Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${courses}" var="course">
+						<tr onclick="courseClicked(this)">
+							<td>${course.id}</td>
+							<td>${course.courseName}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<p>Just click on the row contain name of course which you
+				want to register</p>
+			<br>
+			<p>In order to unregister : click that row again</p>
+		</div>
+	</c:if>
+</div>
 </body>
 </html>

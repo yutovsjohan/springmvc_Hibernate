@@ -23,7 +23,7 @@
 			List Student
 		</div>
 		<div class="panel-body">
-			<table class="table table-striped">
+			<table class="table table-striped" id="studentHome">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -57,7 +57,7 @@
 										<button class="btn btn-warning" onclick="getStudent(${student.id}, 'EDIT');">
 											EDIT
 										</button>
-										<button class="btn btn-danger" onclick="deleteStudent(${student.id});">
+										<button class="btn btn-danger" onclick="deleteStudent(${student.id}, this);">
 											DELETE
 										</button>
 									</td>
